@@ -1,0 +1,7 @@
+Jul 01, 2026 6:12:27 PM org.springframework.context.support.ClassPathXmlApplicationContext prepareRefresh
+INFO: Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@5387f9e0: startup date [Wed Jul 01 18:12:26 UTC 2026]; root of context hierarchy
+Jul 01, 2026 6:12:27 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [applicationContext.xml]
+BookRepository: instance created by Spring container.
+BookService: BookRepository injected via setter.
+Result: Book[id=101, title=Effective Java]
