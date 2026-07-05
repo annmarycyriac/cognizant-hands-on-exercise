@@ -1,1 +1,42 @@
 
+## Exercise 4: Employee Management System
+
+### Objective
+Store and manage employee records — add, search, traverse, and delete —
+using a plain array, and understand the trade-offs that come with it.
+
+### Theory
+A Java array is a block of contiguous memory. For an object array like
+`Employee[]`, each slot holds a *reference* to an Employee object stored
+elsewhere on the heap, not the object's full data — but the references
+themselves are laid out contiguously and index-addressable, so accessing
+any element by index is a direct O(1) memory-offset calculation. The
+trade-off is that the array's size is fixed at creation: growing it means
+allocating an entirely new, larger array and copying every reference
+over, an O(n) operation.
+
+### Implementation
+- `Employee` — employeeId, name, position, salary
+- `EmployeeManagement` — backed by a plain `Employee[]`, with manual
+  capacity doubling (`resizeIfNeeded()`) shown live in the demo output
+
+### Complexity
+| Operation | Complexity | Why |
+|---|---|---|
+| Add | O(1) amortized | O(n) only when the array must resize |
+| Search | O(n) | linear scan — no index/key by employeeId |
+| Traverse | O(n) | must visit every element |
+| Delete | O(n) | O(n) to find + O(n) to shift remaining elements left |
+
+**Limitations of arrays:** fixed size forces costly resize-and-copy when
+full; deleting/inserting in the middle requires shifting every subsequent
+element (O(n)) even though logically only one item changed; there's no
+built-in key-based lookup, so searching by an attribute other than index
+is always O(n) unless the array is kept sorted and binary search is used.
+
+**When to use arrays:** when the number of records is known/bounded and
+mostly static, and fast index-based (positional) access matters more than
+fast key-based search or frequent insert/delete. For a growing employee
+roster with frequent adds/removes and ID-based lookups, a
+`HashMap<Integer, Employee>` (as in Exercise 1) is the better real-world
+choice.
