@@ -1,1 +1,35 @@
+## Exercise 1: Inventory Management System
 
+### Objective
+Build a system to add, update, delete, and search products in a warehouse
+inventory, choosing a data structure that keeps these operations efficient
+even as the inventory grows large.
+
+### Theory
+Data structures and algorithms matter here because a warehouse inventory
+is queried and modified constantly — the wrong structure turns every
+operation into a slow linear scan as inventory size grows. A `HashMap`
+stores key–value pairs in buckets derived from a hash of the key
+(`productId`), so looking up, inserting, or removing an entry doesn't
+require scanning other entries at all — it computes the bucket directly.
+An `ArrayList`, by contrast, has no notion of "key" — finding a product by
+ID means checking elements one by one until a match appears.
+
+### Implementation
+- `Product` — productId, productName, quantity, price
+- `InventoryManagement` — backed by `HashMap<Integer, Product>`
+- add / update / delete / search implemented via `put`, `get`, `remove`
+
+### Complexity
+| Operation | HashMap (used) | ArrayList (for comparison) |
+|---|---|---|
+| Add | O(1) average, O(n) worst (resize/collisions) | O(1) amortized |
+| Update | O(1) average | O(n) — must scan to find the ID |
+| Delete | O(1) average | O(n) — scan + shift |
+| Search | O(1) average | O(n) — linear scan |
+
+**Optimization notes:** A `TreeMap` would give O(log n) operations while
+keeping keys sorted, useful if ordered traversal by ID is also needed. A
+secondary index (e.g. a map keyed by quantity range) could speed up
+specific queries like "products with low stock" at the cost of extra
+memory and more bookkeeping on every write.
