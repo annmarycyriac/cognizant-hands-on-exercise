@@ -1,1 +1,43 @@
 
+
+## Exercise 7: Financial Forecasting (Recursion)
+
+### Objective
+Predict a future value from a present value and a growth rate using a
+recursive algorithm, and understand how to optimize it.
+
+### Theory
+Recursion solves a problem by expressing it in terms of a smaller version
+of itself, plus a base case that stops the recursion. Compound growth is
+naturally recursive: the value after `n` periods is just the value after
+`n-1` periods, grown by one more period's rate:
+```
+futureValue(PV, r, n) = futureValue(PV, r, n-1) * (1 + r)
+futureValue(PV, r, 0) = PV        <-- base case
+```
+This mirrors how compound growth actually happens period by period,
+which is why recursion "simplifies" the problem here — the code directly
+matches the real-world definition rather than requiring a derived
+closed-form loop.
+
+### Implementation
+Three versions, all verified to produce identical results:
+1. `futureValueRecursive()` — naive recursion, one call per period
+2. `futureValueMemoized()` — caches results by period count in a `HashMap`
+3. `futureValueFastPow()` — exponentiation by squaring, halving the exponent each call
+
+### Complexity
+| Version | Time | Space (call stack) |
+|---|---|---|
+| Naive recursion | O(n) | O(n) — risks StackOverflowError for very large n |
+| Memoized | O(n) first call, O(1) on repeats | O(n) cache |
+| Fast power (exponentiation by squaring) | O(log n) | O(log n) |
+
+**Optimizing the recursive solution:** memoization avoids recomputing
+values already seen (useful when a forecasting tool re-queries
+overlapping projections), but doesn't change the complexity class of a
+single fresh call. Exponentiation by squaring is the real optimization —
+rewriting `(1+r)^n` by halving `n` each recursive call instead of
+decrementing by 1 turns O(n) into O(log n), which matters when
+forecasting far into the future (large `n`) or when performance matters
+more than mirroring the year-by-year growth story directly.
