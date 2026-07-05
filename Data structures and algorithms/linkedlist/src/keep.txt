@@ -1,1 +1,39 @@
 
+## Exercise 5: Task Management System (Linked List)
+
+### Objective
+Manage tasks — add, search, traverse, delete — using a singly linked
+list, and understand why linked lists suit dynamic data well.
+
+### Theory
+A **singly linked list** node holds data plus one reference: to the
+*next* node. Traversal only goes one direction, head to tail. A
+**doubly linked list** node holds two references — next *and* previous —
+allowing traversal in both directions and O(1) removal of a node once you
+already have a direct reference to it (no need to re-walk from the head
+to find its predecessor). The trade-off is a doubly linked list uses more
+memory per node (an extra pointer) and slightly more bookkeeping to keep
+both directions consistent on every insert/delete.
+
+### Implementation
+- `Task` — taskId, taskName, status
+- `TaskLinkedList` — a hand-rolled singly linked list (own `Node` class,
+  not `java.util.LinkedList`), with add/search/traverse/delete
+
+### Complexity
+| Operation | Complexity | Why |
+|---|---|---|
+| Add | O(n) | must walk to the tail (O(1) if a tail pointer is kept) |
+| Search | O(n) | no random access — walk node by node |
+| Traverse | O(n) | visiting every node is inherently linear |
+| Delete | O(n) | must walk to find the node and its predecessor |
+
+**Advantages of linked lists over arrays for dynamic data:** O(1)
+insertion/removal at the head (or anywhere, given a direct node
+reference) with no shifting of other elements — unlike an array, which
+needs O(n) shifting. No fixed capacity or resize-and-copy step: a linked
+list grows one node at a time in O(1), while an array must reallocate and
+copy everything once full. Memory is allocated exactly as needed per
+task, with none pre-allocated and unused. The trade-off: linked lists
+lose O(1) random access by position (must walk from the head every time)
+and spend extra memory per node on the "next" pointer.
