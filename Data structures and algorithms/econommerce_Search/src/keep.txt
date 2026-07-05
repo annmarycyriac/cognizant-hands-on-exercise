@@ -1,1 +1,44 @@
+## Exercise 2: E-commerce Platform Search Function
 
+### Objective
+Implement and compare two search strategies for finding a product by name
+in an e-commerce catalog, and determine which is more suitable.
+
+### Theory
+**Big O notation** describes how an algorithm's running time (or memory)
+grows as input size `n` grows, focusing on the dominant term so
+comparisons are independent of specific hardware or input. **Linear
+search** checks every element in sequence until it finds a match or
+exhausts the list — it makes no assumptions about ordering. **Binary
+search** repeatedly halves the search range by comparing the middle
+element to the target, but this only works correctly if the data is
+already sorted by the field being searched.
+
+- Best case: the target is found immediately (first element for linear,
+  middle element for binary).
+- Average case: the target is found after a "typical" number of steps.
+- Worst case: the target is last, or absent, forcing the maximum number
+  of comparisons.
+
+### Implementation
+- `Product` — productId, productName, category
+- `SearchAlgorithms.linearSearch()` — works on the array as-is
+- `SearchAlgorithms.binarySearch()` — requires a pre-sorted array (sorted by name via `Arrays.sort` with a comparator)
+
+### Complexity
+| Case | Linear Search | Binary Search |
+|---|---|---|
+| Best | O(1) | O(1) |
+| Average | O(n) | O(log n) |
+| Worst | O(n) | O(log n) |
+
+**Which is more suitable?** Binary search is dramatically faster for
+large, mostly-static catalogs (searching 1,000,000 products takes ~20
+comparisons vs. up to 1,000,000). Its cost is that the array must stay
+sorted, so every insert/update triggers an O(n log n) re-sort unless
+insertion is done carefully (e.g. inserting in sorted position, which is
+still O(n) per insert). For a catalog that changes constantly, linear
+search's simplicity may be preferable; for one that's mostly read and
+rarely written, binary search wins. (Real-world search engines like
+Elasticsearch use inverted indexes instead of either — but binary search
+is the right in-memory choice for a sorted, mostly-static list.)
