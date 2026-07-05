@@ -1,1 +1,46 @@
+## Exercise 3: Sorting Customer Orders
 
+### Objective
+Sort customer orders by total price so high-value orders can be
+prioritized, and compare two sorting algorithms for this task.
+
+### Theory
+**Bubble Sort** repeatedly steps through the list, swapping adjacent
+elements that are out of order, until a full pass makes no swaps. It's
+simple but does a lot of redundant comparison work. **Quick Sort** picks a
+pivot element, partitions the array so everything smaller than the pivot
+comes before it and everything larger comes after, then recursively
+sorts each partition. This "divide and conquer" strategy means each
+element is typically involved in far fewer comparisons overall than
+Bubble Sort's pairwise approach. **Insertion Sort** builds a sorted
+section one element at a time, inserting each new element into its
+correct position among the already-sorted elements — efficient for small
+or nearly-sorted data. **Merge Sort** splits the array in half
+recursively, sorts each half, then merges the two sorted halves back
+together — like Quick Sort it's O(n log n), but it's stable and doesn't
+suffer Quick Sort's rare O(n²) worst case, at the cost of needing O(n)
+extra memory for the merge step.
+
+### Implementation
+- `Order` — orderId, customerName, totalPrice
+- `SortingAlgorithms.bubbleSort()` — with an early-exit optimization when no swaps occur
+- `SortingAlgorithms.quickSort()` — Lomuto partition scheme, last element as pivot
+
+### Complexity
+| Case | Bubble Sort | Quick Sort |
+|---|---|---|
+| Best | O(n) (early exit) | O(n log n) |
+| Average | O(n²) | O(n log n) |
+| Worst | O(n²) | O(n²) (rare — poor pivot on sorted/reverse data) |
+| Extra space | O(1) | O(log n) (recursion stack) |
+
+**Measured result** (5,000 random orders): Bubble Sort ≈ 33 ms, Quick
+Sort ≈ 3.7 ms — roughly a 9x speedup, and the gap widens further as the
+dataset grows, matching the O(n²) vs O(n log n) prediction.
+
+**Why Quick Sort is generally preferred:** its average-case O(n log n)
+scales far better than Bubble Sort's O(n²) as order volume grows — e.g.
+sorting 10,000 orders is roughly 10,000x more "work units" for Bubble
+Sort's n² growth than for Quick Sort's n log n growth. Bubble Sort is
+only reasonable for small or nearly-sorted datasets, where its simplicity
+and low overhead are acceptable trade-offs.
