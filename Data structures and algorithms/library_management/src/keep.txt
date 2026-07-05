@@ -1,1 +1,34 @@
+## Exercise 6: Library Management System
+
+### Objective
+Let users search for books by title, comparing linear and binary search
+approaches for this use case.
+
+### Theory
+Same underlying algorithms as Exercise 2, applied to book titles: linear
+search checks every book in whatever order they're stored; binary search
+requires the books to be pre-sorted alphabetically by title, then halves
+the search range each comparison.
+
+### Implementation
+- `Book` — bookId, title, author
+- `LibrarySearch.linearSearchByTitle()` — original order
+- `LibrarySearch.binarySearchByTitle()` — requires books sorted by title first
+
+### Complexity
+| Case | Linear Search | Binary Search |
+|---|---|---|
+| Best | O(1) | O(1) |
+| Average | O(n) | O(log n) |
+| Worst | O(n) | O(log n) |
+
+**When to use each, based on catalog size and order:** a small library or
+one that changes constantly favors linear search's simplicity over binary
+search's sorting overhead. A large, mostly-static catalog (thousands+ of
+books) benefits hugely from binary search's O(log n) — finding a title
+among 100,000 books takes ~17 comparisons versus up to 100,000 with
+linear search. If users search by multiple fields (title *or* author),
+a single sort order only accelerates lookups on that one field — a
+separate sorted index or a hash-based index per field would be needed for
+both.
 
