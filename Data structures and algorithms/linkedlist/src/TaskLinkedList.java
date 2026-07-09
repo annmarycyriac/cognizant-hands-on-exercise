@@ -1,18 +1,7 @@
 /**
  * Exercise 5: Task Management System
  * --------------------------------------
- * A hand-rolled singly linked list of Tasks (not java.util.LinkedList,
- * to show the actual node-and-pointer mechanics).
- *
- * SINGLY LINKED LIST vs DOUBLY LINKED LIST:
- * A singly linked list node holds data plus one reference: to the NEXT
- * node. Traversal is one-directional (head -> tail only). A doubly linked
- * list node holds two references (next AND previous), allowing traversal
- * in both directions and O(1) removal of a node once you have a direct
- * reference to it (no need to re-walk from the head to find its
- * predecessor). The trade-off is a doubly linked list uses more memory
- * per node (an extra pointer) and slightly more bookkeeping on every
- * insert/delete to keep both directions consistent.
+
  */
 public class TaskLinkedList {
 
@@ -71,10 +60,7 @@ public class TaskLinkedList {
         }
     }
 
-    /**
-     * Delete a task by ID. O(n): must walk to find the node AND keep a
-     * reference to its predecessor so we can re-link around it.
-     */
+   
     public boolean deleteTask(int taskId) {
         if (head == null) return false;
 
