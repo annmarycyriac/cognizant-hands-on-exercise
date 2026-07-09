@@ -4,15 +4,7 @@ import java.util.Collection;
 /**
  * Exercise 1: Inventory Management System
  * ------------------------------------------
- * Stores products keyed by productId in a HashMap.
- *
- * WHY A HASHMAP?
- * A warehouse inventory is looked up, updated, and deleted by productId
- * far more often than it is iterated in order. A HashMap gives average
- * O(1) time for add/update/delete/search by key, versus O(n) for an
- * ArrayList (which would require scanning to find a matching productId).
- * The trade-off is that HashMap does not preserve insertion order and
- * uses more memory per entry (hash buckets) than a plain array/ArrayList.
+ 
  */
 public class InventoryManagement {
 
