@@ -5,34 +5,21 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-/**
- * Exercise 4: Arrange-Act-Assert (AAA) Pattern, Test Fixtures,
- * Setup and Teardown Methods in JUnit
- * ------------------------------------------------------------------
- * Demonstrates:
- *   - The AAA (Arrange-Act-Assert) pattern for structuring each test
- *   - @Before: runs before EVERY test method (setup / fixture creation)
- *   - @After:  runs after EVERY test method (teardown / cleanup)
- *
- * Console print statements are included in setUp()/tearDown() and each
- * test purely so the execution order is visible in the output; this is
- * for demonstration only and would normally be omitted or replaced with
- * logging in real test suites.
- */
+
 public class BankAccountTest {
 
     private BankAccount account;
 
     @Before
     public void setUp() {
-        // Runs before each test method - creates a fresh fixture
+      
         account = new BankAccount(100.0);
         System.out.println("[@Before] setUp() - fresh BankAccount created with balance 100.0");
     }
 
     @After
     public void tearDown() {
-        // Runs after each test method - cleans up the fixture
+      
         account = null;
         System.out.println("[@After] tearDown() - account reference cleared");
     }
@@ -90,8 +77,8 @@ public class BankAccountTest {
         double withdrawAmount = 40.0;
 
         // Act
-        account.deposit(depositAmount);   // balance: 125.0
-        account.withdraw(withdrawAmount); // balance: 85.0
+        account.deposit(depositAmount);  
+        account.withdraw(withdrawAmount); 
 
         // Assert
         assertEquals(85.0, account.getBalance(), 0.001);
