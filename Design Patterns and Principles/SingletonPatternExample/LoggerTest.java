@@ -1,10 +1,6 @@
 package com.example.singleton;
 
-/**
- * Demonstrates and verifies that Logger truly behaves as a Singleton:
- * every call to getInstance() returns the SAME object, and that
- * object's state (logCount) is shared everywhere it's used.
- */
+
 public class LoggerTest {
 
     public static void main(String[] args) {
