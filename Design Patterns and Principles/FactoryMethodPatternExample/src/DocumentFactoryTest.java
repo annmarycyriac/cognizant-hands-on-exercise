@@ -1,10 +1,6 @@
 package com.example.factory;
 
-/**
- * Demonstrates creating different kinds of documents through the
- * Factory Method pattern, WITHOUT the client code ever calling
- * `new WordDocument()`, `new PdfDocument()`, etc. directly.
- */
+
 public class DocumentFactoryTest {
 
     public static void main(String[] args) {
