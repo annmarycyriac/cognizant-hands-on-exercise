@@ -3,8 +3,7 @@ package com.cognizant.junitbasics;
 /**
  * Exercise 4: Arrange-Act-Assert (AAA) Pattern, Test Fixtures
  * ------------------------------------------------------------------
- * A simple BankAccount class used to demonstrate the AAA testing
- * pattern along with @Before / @After setup and teardown methods.
+
  */
 public class BankAccount {
 
