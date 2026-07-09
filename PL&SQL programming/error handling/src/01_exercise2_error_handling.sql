@@ -2,12 +2,6 @@
 -- Exercise 2: Error Handling
 -- ============================================================
 
--- ------------------------------------------------------------
--- Scenario 1: SafeTransferFunds
--- Transfers funds between two accounts. If any error occurs
--- (e.g. insufficient funds, invalid account), the error is
--- logged into ErrorLog and the whole transaction is rolled back.
--- ------------------------------------------------------------
 CREATE OR REPLACE PROCEDURE SafeTransferFunds (
     p_from_account IN Accounts.AccountID%TYPE,
     p_to_account   IN Accounts.AccountID%TYPE,
@@ -17,7 +11,7 @@ CREATE OR REPLACE PROCEDURE SafeTransferFunds (
     e_insufficient_funds EXCEPTION;
     e_invalid_account    EXCEPTION;
 BEGIN
-    -- Lock and read the source account balance
+   
     BEGIN
         SELECT Balance INTO v_from_balance
         FROM Accounts
@@ -28,7 +22,7 @@ BEGIN
             RAISE e_invalid_account;
     END;
 
-    -- Make sure the destination account exists
+  
     DECLARE
         v_dummy Accounts.AccountID%TYPE;
     BEGIN
@@ -85,12 +79,7 @@ END SafeTransferFunds;
 /
 
 
--- ------------------------------------------------------------
--- Scenario 2: UpdateSalary
--- Increases an employee's salary by a given percentage.
--- If the employee ID does not exist, the exception is handled
--- and an error is logged.
--- ------------------------------------------------------------
+
 CREATE OR REPLACE PROCEDURE UpdateSalary (
     p_employee_id IN Employees.EmployeeID%TYPE,
     p_percentage  IN NUMBER
@@ -127,12 +116,7 @@ END UpdateSalary;
 /
 
 
--- ------------------------------------------------------------
--- Scenario 3: AddNewCustomer
--- Inserts a new customer. If a customer with the same ID
--- already exists, the exception is handled, an error is
--- logged, and the insertion is prevented.
--- ------------------------------------------------------------
+
 CREATE OR REPLACE PROCEDURE AddNewCustomer (
     p_customer_id IN Customers.CustomerID%TYPE,
     p_name        IN Customers.Name%TYPE,
