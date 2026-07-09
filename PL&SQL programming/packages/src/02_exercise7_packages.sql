@@ -2,9 +2,6 @@
 -- Exercise 7: Packages
 -- ============================================================
 
--- ------------------------------------------------------------
--- Scenario 1: CustomerManagement package
--- ------------------------------------------------------------
 CREATE OR REPLACE PACKAGE CustomerManagement AS
     PROCEDURE AddCustomer (
         p_customer_id IN Customers.CustomerID%TYPE,
@@ -85,9 +82,7 @@ END CustomerManagement;
 /
 
 
--- ------------------------------------------------------------
--- Scenario 2: EmployeeManagement package
--- ------------------------------------------------------------
+
 CREATE OR REPLACE PACKAGE EmployeeManagement AS
     PROCEDURE HireEmployee (
         p_employee_id IN Employees.EmployeeID%TYPE,
@@ -172,9 +167,7 @@ END EmployeeManagement;
 /
 
 
--- ------------------------------------------------------------
--- Scenario 3: AccountOperations package
--- ------------------------------------------------------------
+
 CREATE OR REPLACE PACKAGE AccountOperations AS
     PROCEDURE OpenAccount (
         p_account_id   IN Accounts.AccountID%TYPE,
