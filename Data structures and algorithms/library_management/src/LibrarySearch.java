@@ -3,15 +3,11 @@ import java.util.Arrays;
 /**
  * Exercise 6: Library Management System
  * ------------------------------------------
- * Implements Linear Search (by title, any order) and Binary Search
- * (by title, requires the array to be sorted alphabetically by title first).
+
  */
 public class LibrarySearch {
 
-    /**
-     * Linear Search by title: checks every book until a match is found.
-     * Time complexity: O(n) worst/average case, O(1) best case.
-     */
+    
     public static Book linearSearchByTitle(Book[] books, String targetTitle) {
         for (Book b : books) {
             if (b.getTitle().equalsIgnoreCase(targetTitle)) {
@@ -21,10 +17,7 @@ public class LibrarySearch {
         return null;
     }
 
-    /**
-     * Binary Search by title: requires books[] to already be sorted by title.
-     * Time complexity: O(log n) worst/average case, O(1) best case.
-     */
+    
     public static Book binarySearchByTitle(Book[] sortedBooks, String targetTitle) {
         int low = 0;
         int high = sortedBooks.length - 1;
@@ -44,7 +37,7 @@ public class LibrarySearch {
         return null;
     }
 
-    /** Sorts a copy of books[] alphabetically by title (precondition for binary search). */
+   
     public static void sortByTitle(Book[] books) {
         Arrays.sort(books, (a, b) -> a.getTitle().compareToIgnoreCase(b.getTitle()));
     }
