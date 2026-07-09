@@ -3,13 +3,6 @@ package com.cognizant.junitbasics;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- * Exercise 3: Assertions in JUnit
- * ------------------------------------------------------------------
- * Demonstrates the core JUnit assertion methods used to validate
- * test results: assertEquals, assertTrue, assertFalse, assertNull,
- * and assertNotNull.
- */
 public class AssertionsTest {
 
     @Test
