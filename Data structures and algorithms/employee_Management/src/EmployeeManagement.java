@@ -3,19 +3,7 @@ import java.util.Arrays;
 /**
  * Exercise 4: Employee Management System
  * ------------------------------------------
- * Stores employees in a plain Java array (Employee[]) rather than a
- * collection like ArrayList, to directly illustrate how arrays work:
- * fixed capacity, contiguous memory, and manual resizing.
- *
- * ARRAY REPRESENTATION IN MEMORY:
- * A Java array is a block of contiguous memory. For an object array like
- * Employee[], each slot holds a *reference* (pointer) to an Employee object
- * elsewhere on the heap - the array itself stores fixed-size references,
- * not the objects' full data. Because slots are contiguous and index-based,
- * accessing any element by index is O(1) (direct memory offset calculation).
- * The trade-off is that the array's size is fixed at creation time; growing
- * it requires allocating a new, larger array and copying every reference
- * over - which is exactly what resizeIfNeeded() below does.
+
  */
 public class EmployeeManagement {
 
@@ -51,11 +39,7 @@ public class EmployeeManagement {
         }
     }
 
-    /**
-     * Delete an employee by ID. O(n): O(n) to find it, then O(n) to shift
-     * all subsequent elements left by one to close the gap (arrays don't
-     * support removing a "hole" in the middle without shifting).
-     */
+    
     public boolean deleteEmployee(int employeeId) {
         int indexToRemove = -1;
         for (int i = 0; i < size; i++) {
