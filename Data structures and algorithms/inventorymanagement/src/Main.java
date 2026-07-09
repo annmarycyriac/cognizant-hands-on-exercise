@@ -1,8 +1,7 @@
 /**
  * Exercise 1: Inventory Management System - Demo
  * -------------------------------------------------
- * Demonstrates add, update, delete, and search operations,
- * and prints a summary of the time-complexity analysis.
+ 
  */
 public class Main {
     public static void main(String[] args) {
