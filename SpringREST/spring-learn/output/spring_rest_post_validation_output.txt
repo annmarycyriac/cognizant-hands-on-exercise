@@ -1,0 +1,32 @@
+PS C:\Users\bened\Downloads\Misson_Cognizant\Week_3\SpringREST\spring-learn> mvn spring-boot:run
+PS C:\Users\bened\Downloads\Misson_Cognizant\Week_3\SpringREST\spring-learn> curl -i -H 'Content-Type: application/json' -X POST -d '{"code":"FR","name":"France"}' http://localhost:8090/countries
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 32
+Date: Mon, 22 Jun 2026 10:15:30 GMT
+
+{"code":"FR","name":"France"}
+
+Server Log:
+260622|15:45:30.120|http-nio-8090-exec-1| INFO|c.c.s.c.CountryController| addCountry               | START addCountry
+260622|15:45:30.121|http-nio-8090-exec-1|DEBUG|c.c.s.c.CountryController| addCountry               | Country payload: Country [code=FR, name=France]
+260622|15:45:30.121|http-nio-8090-exec-1| INFO|c.c.s.c.CountryController| addCountry               | END addCountry
+
+
+PS C:\Users\bened\Downloads\Misson_Cognizant\Week_3\SpringREST\spring-learn> curl -i -H 'Content-Type: application/json' -X POST -d '{"code":"F","name":"France"}' http://localhost:8090/countries
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+Connection: close
+Date: Mon, 22 Jun 2026 10:17:45 GMT
+
+{
+  "timestamp": "2026-06-22T10:17:45.312+0000",
+  "status": 400,
+  "errors": [
+    "Country code should be 2 characters"
+  ]
+}
+
+Server Log:
+260622|15:47:45.300|http-nio-8090-exec-2| INFO|com.cognizant.springlearn.GlobalExceptionHandler | handleMethodArgumentNotValid | START handleMethodArgumentNotValid
+260622|15:47:45.308|http-nio-8090-exec-2| INFO|com.cognizant.springlearn.GlobalExceptionHandler | handleMethodArgumentNotValid | END handleMethodArgumentNotValid

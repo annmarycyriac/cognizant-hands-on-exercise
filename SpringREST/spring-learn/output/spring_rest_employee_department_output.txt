@@ -1,0 +1,88 @@
+PS C:\Users\bened\Downloads\Misson_Cognizant\Week_3\SpringREST\spring-learn> mvn spring-boot:run
+PS C:\Users\bened\Downloads\Misson_Cognizant\Week_3\SpringREST\spring-learn> curl -i http://localhost:8090/employees
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Date: Sun, 21 Jun 2026 11:20:00 GMT
+
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "salary": 85000.0,
+    "permanent": true,
+    "dateOfBirth": "12/04/1995",
+    "department": {
+      "id": 1,
+      "name": "IT"
+    },
+    "skillList": [
+      {"id": 1, "name": "Java"},
+      {"id": 2, "name": "Spring Boot"},
+      {"id": 3, "name": "SQL"}
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "salary": 90000.0,
+    "permanent": true,
+    "dateOfBirth": "25/08/1992",
+    "department": {
+      "id": 3,
+      "name": "Finance"
+    },
+    "skillList": [
+      {"id": 3, "name": "SQL"}
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Bob Johnson",
+    "salary": 60000.0,
+    "permanent": false,
+    "dateOfBirth": "03/11/1998",
+    "department": {
+      "id": 1,
+      "name": "IT"
+    },
+    "skillList": [
+      {"id": 1, "name": "Java"}
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Alice Williams",
+    "salary": 55000.0,
+    "permanent": false,
+    "dateOfBirth": "15/01/2000",
+    "department": {
+      "id": 2,
+      "name": "HR"
+    },
+    "skillList": [
+      {"id": 3, "name": "SQL"}
+    ]
+  }
+]
+
+Server Log:
+260621|16:50:00.010|http-nio-8090-exec-1| INFO|c.c.s.c.EmployeeController| getAllEmployees          | START getAllEmployees
+260621|16:50:00.015|http-nio-8090-exec-1|DEBUG|c.c.s.c.EmployeeController| getAllEmployees          | Employees: [Employee [id=1, name=John Doe...], Employee [id=2...]]
+260621|16:50:00.017|http-nio-8090-exec-1| INFO|c.c.s.c.EmployeeController| getAllEmployees          | END getAllEmployees
+
+
+PS C:\Users\bened\Downloads\Misson_Cognizant\Week_3\SpringREST\spring-learn> curl -i http://localhost:8090/departments
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Date: Sun, 21 Jun 2026 11:22:15 GMT
+
+[
+  {"id": 1, "name": "IT"},
+  {"id": 2, "name": "HR"},
+  {"id": 3, "name": "Finance"}
+]
+
+Server Log:
+260621|16:52:15.110|http-nio-8090-exec-2| INFO|c.c.s.c.DepartmentController| getAllDepartments        | START getAllDepartments
+260621|16:52:15.113|http-nio-8090-exec-2|DEBUG|c.c.s.c.DepartmentController| getAllDepartments        | Departments: [Department [id=1, name=IT], Department [id=2, name=HR], Department [id=3, name=Finance]]
+260621|16:52:15.114|http-nio-8090-exec-2| INFO|c.c.s.c.DepartmentController| getAllDepartments        | END getAllDepartments

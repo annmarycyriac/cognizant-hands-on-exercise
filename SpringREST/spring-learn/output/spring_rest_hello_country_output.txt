@@ -1,0 +1,75 @@
+PS C:\Users\bened\Downloads\Misson_Cognizant\Week_3\SpringREST\spring-learn> mvn spring-boot:run
+PS C:\Users\bened\Downloads\Misson_Cognizant\Week_3\SpringREST\spring-learn> curl -i http://localhost:8090/hello
+HTTP/1.1 200 OK
+Content-Type: text/plain;charset=UTF-8
+Content-Length: 13
+Date: Sat, 20 Jun 2026 12:10:05 GMT
+
+Hello World!!
+
+Server Log:
+260620|17:40:05.120|http-nio-8090-exec-1| INFO|c.c.s.c.HelloController  | sayHello                 | START sayHello
+260620|17:40:05.122|http-nio-8090-exec-1|DEBUG|c.c.s.c.HelloController  | sayHello                 | Response: Hello World!!
+260620|17:40:05.123|http-nio-8090-exec-1| INFO|c.c.s.c.HelloController  | sayHello                 | END sayHello
+
+
+PS C:\Users\bened\Downloads\Misson_Cognizant\Week_3\SpringREST\spring-learn> curl -i http://localhost:8090/country
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 30
+Date: Sat, 20 Jun 2026 12:11:15 GMT
+
+{"code":"IN","name":"India"}
+
+Server Log:
+260620|17:41:15.300|http-nio-8090-exec-2| INFO|c.c.s.c.CountryController| getCountryIndia          | START getCountryIndia
+260620|17:41:15.340|http-nio-8090-exec-2|DEBUG|c.c.springlearn.Country  | <init>                   | Inside Country Constructor.
+260620|17:41:15.341|http-nio-8090-exec-2|DEBUG|c.c.springlearn.Country  | setCode                  | Inside setCode: IN
+260620|17:41:15.341|http-nio-8090-exec-2|DEBUG|c.c.springlearn.Country  | setName                  | Inside setName: India
+260620|17:41:15.345|http-nio-8090-exec-2|DEBUG|c.c.s.c.CountryController| getCountryIndia          | Country: Country [code=IN, name=India]
+260620|17:41:15.346|http-nio-8090-exec-2| INFO|c.c.s.c.CountryController| getCountryIndia          | END getCountryIndia
+
+
+PS C:\Users\bened\Downloads\Misson_Cognizant\Week_3\SpringREST\spring-learn> curl -i http://localhost:8090/countries
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Date: Sat, 20 Jun 2026 12:12:30 GMT
+
+[{"code":"IN","name":"India"},{"code":"US","name":"United States"},{"code":"DE","name":"Germany"},{"code":"JP","name":"Japan"}]
+
+Server Log:
+260620|17:42:30.150|http-nio-8090-exec-3| INFO|c.c.s.c.CountryController| getAllCountries          | START getAllCountries
+260620|17:42:30.152|http-nio-8090-exec-3|DEBUG|c.c.s.c.CountryController| getAllCountries          | Countries size: 4
+260620|17:42:30.153|http-nio-8090-exec-3| INFO|c.c.s.c.CountryController| getAllCountries          | END getAllCountries
+
+
+PS C:\Users\bened\Downloads\Misson_Cognizant\Week_3\SpringREST\spring-learn> curl -i http://localhost:8090/countries/de
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 32
+Date: Sat, 20 Jun 2026 12:13:45 GMT
+
+{"code":"DE","name":"Germany"}
+
+Server Log:
+260620|17:43:45.010|http-nio-8090-exec-4| INFO|c.c.s.c.CountryController| getCountry               | START getCountry de
+260620|17:43:45.012|http-nio-8090-exec-4|DEBUG|c.c.s.c.CountryController| getCountry               | Country fetched: Country [code=DE, name=Germany]
+260620|17:43:45.013|http-nio-8090-exec-4| INFO|c.c.s.c.CountryController| getCountry               | END getCountry
+
+
+PS C:\Users\bened\Downloads\Misson_Cognizant\Week_3\SpringREST\spring-learn> curl -i http://localhost:8090/countries/XX
+HTTP/1.1 404 Not Found
+Content-Type: application/json;charset=UTF-8
+Date: Sat, 20 Jun 2026 12:14:50 GMT
+
+{"timestamp":"2026-06-20T12:14:50.112+0000","status":404,"error":"Not Found","message":"Country with code XX not found","path":"/countries/XX"}
+
+Server Log:
+260620|17:44:50.100|http-nio-8090-exec-5| INFO|c.c.s.c.CountryController| getCountry               | START getCountry XX
+260620|17:44:50.105|http-nio-8090-exec-5|ERROR|o.s.b.w.s.s.ErrorPageFilter | log                      | Cannot forward to error page since response has already been committed
+
+
+PS C:\Users\bened\Downloads\Misson_Cognizant\Week_3\SpringREST\spring-learn> mvn test
+[INFO] Running com.cognizant.springlearn.SpringLearnApplicationTests
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.650 s
+[INFO] BUILD SUCCESS

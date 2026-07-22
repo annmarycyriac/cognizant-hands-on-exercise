@@ -1,0 +1,61 @@
+PS C:\Users\bened\Downloads\Misson_Cognizant\Week_3\SpringREST\spring-learn> mvn spring-boot:run
+PS C:\Users\bened\Downloads\Misson_Cognizant\Week_3\SpringREST\spring-learn> curl -i http://localhost:8090/countries
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+Date: Wed, 24 Jun 2026 08:35:10 GMT
+
+{"timestamp":"2026-06-24T08:35:10.125+0000","status":401,"error":"Unauthorized","message":"Unauthorized","path":"/countries"}
+
+Server Log:
+260624|14:05:10.120|http-nio-8090-exec-1| INFO|.s.JwtAuthorizationFilter| doFilterInternal         | START doFilterInternal
+260624|14:05:10.122|http-nio-8090-exec-1|DEBUG|.s.JwtAuthorizationFilter| doFilterInternal         | Authorization Header: null
+
+
+PS C:\Users\bened\Downloads\Misson_Cognizant\Week_3\SpringREST\spring-learn> curl -i -u user:pwd http://localhost:8090/authenticate
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 24 Jun 2026 08:36:20 GMT
+
+{"token":"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNzgyMjkwODIwLCJleHAiOjE3ODIyOTIwMjB9.1FL0lpnyXWYzLbHKmdoLoH2U67qyR_-EyyjwkhIshAI"}
+
+Server Log:
+260624|14:06:20.005|http-nio-8090-exec-2| INFO|.s.JwtAuthorizationFilter| doFilterInternal         | START doFilterInternal
+260624|14:06:20.006|http-nio-8090-exec-2|DEBUG|.s.JwtAuthorizationFilter| doFilterInternal         | Authorization Header: Basic dXNlcjpwd2Q=
+260624|14:06:20.010|http-nio-8090-exec-2| INFO|.AuthenticationController| authenticate             | START authenticate
+260624|14:06:20.010|http-nio-8090-exec-2|DEBUG|.AuthenticationController| authenticate             | Authorization Header: Basic dXNlcjpwd2Q=
+260624|14:06:20.011|http-nio-8090-exec-2| INFO|.AuthenticationController| getUser                  | START getUser
+260624|14:06:20.011|http-nio-8090-exec-2|DEBUG|.AuthenticationController| getUser                  | Decoded user from Basic Auth: user
+260624|14:06:20.011|http-nio-8090-exec-2| INFO|.AuthenticationController| getUser                  | END getUser
+260624|14:06:20.012|http-nio-8090-exec-2| INFO|.AuthenticationController| generateJwt              | START generateJwt
+260624|14:06:20.015|http-nio-8090-exec-2|DEBUG|.AuthenticationController| generateJwt              | Generated Token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNzgyMjkwODIwLCJleHAiOjE3ODIyOTIwMjB9.1FL0lpnyXWYzLbHKmdoLoH2U67qyR_-EyyjwkhIshAI
+260624|14:06:20.016|http-nio-8090-exec-2| INFO|.AuthenticationController| generateJwt              | END generateJwt
+260624|14:06:20.016|http-nio-8090-exec-2| INFO|.AuthenticationController| authenticate             | END authenticate
+
+
+PS C:\Users\bened\Downloads\Misson_Cognizant\Week_3\SpringREST\spring-learn> curl -i -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNzgyMjkwODIwLCJleHAiOjE3ODIyOTIwMjB9.1FL0lpnyXWYzLbHKmdoLoH2U67qyR_-EyyjwkhIshAI" http://localhost:8090/countries
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 24 Jun 2026 08:38:15 GMT
+
+[{"code":"IN","name":"India"},{"code":"US","name":"United States"},{"code":"DE","name":"Germany"},{"code":"JP","name":"Japan"}]
+
+Server Log:
+260624|14:08:15.110|http-nio-8090-exec-3| INFO|.s.JwtAuthorizationFilter| doFilterInternal         | START doFilterInternal
+260624|14:08:15.111|http-nio-8090-exec-3|DEBUG|.s.JwtAuthorizationFilter| doFilterInternal         | Authorization Header: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNzgyMjkwODIwLCJleHAiOjE3ODIyOTIwMjB9.1FL0lpnyXWYzLbHKmdoLoH2U67qyR_-EyyjwkhIshAI
+260624|14:08:15.112|http-nio-8090-exec-3|DEBUG|.s.JwtAuthorizationFilter| getAuthentication        | Decoded user: user
+260624|14:08:15.115|http-nio-8090-exec-3| INFO|c.c.s.c.CountryController| getAllCountries          | START getAllCountries
+260624|14:08:15.116|http-nio-8090-exec-3| INFO|c.c.s.c.CountryController| getAllCountries          | END getAllCountries
+260624|14:08:15.116|http-nio-8090-exec-3| INFO|.s.JwtAuthorizationFilter| doFilterInternal         | END doFilterInternal
+
+
+PS C:\Users\bened\Downloads\Misson_Cognizant\Week_3\SpringREST\spring-learn> curl -i -H "Authorization: Bearer CORRUPTED_TOKEN" http://localhost:8090/countries
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+Date: Wed, 24 Jun 2026 08:39:40 GMT
+
+{"timestamp":"2026-06-24T08:39:40.510+0000","status":401,"error":"Unauthorized","message":"Unauthorized","path":"/countries"}
+
+Server Log:
+260624|14:09:40.500|http-nio-8090-exec-4| INFO|.s.JwtAuthorizationFilter| doFilterInternal         | START doFilterInternal
+260624|14:09:40.501|http-nio-8090-exec-4|DEBUG|.s.JwtAuthorizationFilter| doFilterInternal         | Authorization Header: Bearer CORRUPTED_TOKEN
+260624|14:09:40.502|http-nio-8090-exec-4|ERROR|.s.JwtAuthorizationFilter| getAuthentication        | JWT validation failed: JWT strings must contain exactly 2 period characters. Found: 0
